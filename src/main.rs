@@ -8,7 +8,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let instructions = [0x6221, 0x1223, 0x1300, 0xa342];
     let offset = pio.add_program(&PioProgram::new(&instructions, None))?;
 
-    let gpio = 14;
+    let gpio = 4;
 
     println!("ws2812 raspberry pi tesing, running on gpio {}", gpio);
 
