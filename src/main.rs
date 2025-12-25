@@ -30,9 +30,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("init success");
 
     loop {
-        //for _ in 0..8 {
+        for _ in 0..8 {
             state_machine.put(rand::random::<u32>() << 8, true)?;
-        //}
+        }
 
         thread::sleep(Duration::from_millis(10));
     }
