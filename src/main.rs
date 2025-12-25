@@ -15,6 +15,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let rgbw = true;
     //init
     pio.gpio_init(gpio)?;
+    pio.pio_gpio_init(gpio)?;
     state_machine.set_consecutive_pindirs(gpio as u32, 1, true)?;
     let div = 200_000_000 as f64 / (800_000 * (3 + 4 + 3)) as f64;
     let sm_config = SmConfig::default()
