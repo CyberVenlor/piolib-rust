@@ -25,6 +25,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     state_machine.init(offset, &sm_config)?;
     state_machine.set_enabled(true)?;
 
+    println!("init success");
+
     loop {
         state_machine.put(rand::random(), true)?;
         thread::sleep(Duration::from_millis(10));
