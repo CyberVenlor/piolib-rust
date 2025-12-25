@@ -31,7 +31,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     loop {
         //for _ in 0..8 {
-            state_machine.put(rand::random(), true)?;
+            state_machine.put(rand::random::<u32>() << 8, true)?;
         //}
 
         thread::sleep(Duration::from_millis(10));
