@@ -18,6 +18,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     state_machine.set_consecutive_pindirs(gpio as u32, 1, true)?;
     let div = 200_000_000 as f64 / (800_000 * (3 + 4 + 3)) as f64;
     let sm_config = SmConfig::default()
+        .set_wrap(offset as u32 + 0, offset as u32 + 3)?
+        .set_sideset(1, false, false)?
         .set_sideset_pins(gpio as u32)?
         .set_out_shift(false, true, if rgbw {32} else {24})?
         .set_fifo_join(PioFifoJoin::Tx)?
@@ -28,7 +30,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("init success");
 
     loop {
-        state_machine.put(rand::random(), true)?;
+        for _ in 0..50 {
+            state_machine.put(rand::random(), true)?;
+        }
+
         thread::sleep(Duration::from_millis(10));
     }
 }
