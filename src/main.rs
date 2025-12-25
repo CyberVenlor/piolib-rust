@@ -30,7 +30,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("init success");
 
     loop {
-        for _ in 0..50 {
+        for _ in 0..8 {
             state_machine.put(rand::random(), true)?;
         }
 
