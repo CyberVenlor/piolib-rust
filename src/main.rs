@@ -1,4 +1,4 @@
-use std::{error::Error, process::Stdio, thread::sleep_ms};
+use std::{error::Error, process::Stdio, thread::{self, sleep_ms}, time::Duration};
 use pio_pi5_rs::*;
 
 
@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     //init
     pio.gpio_init(gpio)?;
     state_machine.set_consecutive_pindirs(gpio as u32, 1, true)?;
-    let div = 500_000_000 as f64 / (800_000 * (3 + 4 + 3)) as f64;
+    let div = 200_000_000 as f64 / (800_000 * (3 + 4 + 3)) as f64;
     let sm_config = SmConfig::default()
         .set_sideset_pins(gpio as u32)?
         .set_out_shift(false, true, if rgbw {32} else {24})?
@@ -27,8 +27,6 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     loop {
         state_machine.put(rand::random(), true)?;
-        sleep_ms(10);
+        thread::sleep(Duration::from_millis(10));
     }
-    
-    Ok(())
 }
